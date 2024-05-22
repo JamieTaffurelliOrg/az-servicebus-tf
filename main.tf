@@ -39,15 +39,27 @@ resource "azurerm_monitor_diagnostic_setting" "service_bus_diagnostics" {
   log_analytics_workspace_id = data.azurerm_log_analytics_workspace.logs.id
 
   enabled_log {
-    category = "StorageRead"
+    category = "ApplicationMetricsLogs"
   }
-  metric {
-    category = "Transaction"
+
+  enabled_log {
+    category = "DiagnosticErrorLogs"
+  }
+
+  enabled_log {
+    category = "OperationalLogs"
+  }
+
+  enabled_log {
+    category = "RuntimeAuditLogs"
+  }
+
+  enabled_log {
+    category = "VNetAndIPFilteringLogs"
   }
 
   metric {
-    category = "Capacity"
-    enabled  = false
+    category = "AllMetrics"
   }
 }
 
